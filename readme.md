@@ -1,126 +1,88 @@
-# How to Set Up Visual Studio Code for Java Programming (CP and DSA)
+# How to Set Up Visual Studio Code for Java Programming - CP and DSA
 
-Follow these simple steps to configure Visual Studio Code (VS Code) for Competitive Programming (CP) and Data Structures & Algorithms (DSA) in Java.
+## Step-by-Step Guide with Visuals
 
----
+### 1. Install Visual Studio Code
+- Download Visual Studio Code from [official website](https://code.visualstudio.com/).
+- Install it by following the setup instructions.
 
-## Step 1: Install Prerequisites
+![Install VS Code](imhttps://www.google.com/imgres?q=vscode%20install%20image&imgurl=https%3A%2F%2Fashutoshtripathi.com%2Fwp-content%2Fuploads%2F2021%2F04%2Fvs-code-installation-featured-image.png%3Fw%3D1200&imgrefurl=https%3A%2F%2Fashutoshtripathi.com%2F2021%2F04%2F05%2Fhow-to-install-vscode-ide-on-windows-visual-studio-code%2F&docid=BRxxYeOGIJq2YM&tbnid=xT5M-dLnpdn_-M&vet=12ahUKEwjO7YKF_-SKAxUtxzgGHXduHeAQM3oECGsQAA..i&w=1200&h=735&hcb=2&ved=2ahUKEwjO7YKF_-SKAxUtxzgGHXduHeAQM3oECGsQAA)
 
-1. **Install Java Development Kit (JDK):**
-   - Download and install [JDK](https://www.oracle.com/java/technologies/javase-downloads.html).
-   - Verify installation:
-     ```bash
-     javac -version
-     java -version
-     ```
+### 2. Install Java JDK
+- Download Java JDK (latest version) from [Oracle's official site](https://www.oracle.com/java/technologies/javase-downloads.html).
+- Install and configure the `JAVA_HOME` environment variable.
 
-2. **Install Visual Studio Code:**
-   - Download and install [VS Code](https://code.visualstudio.com/).
+![Install Java JDK](image_link_here)
 
-3. **Install Extensions:**
-   - Open VS Code.
-   - Go to Extensions (`Ctrl+Shift+X`).
-   - Search and install:
-     - **Language Support for Java(TM) by Red Hat**
-     - **Debugger for Java**
-     - **Code Runner (optional)**
+### 3. Install Java Extensions in VS Code
+- Open VS Code.
+- Go to Extensions Marketplace (Ctrl+Shift+X).
+- Search for **"Java Extension Pack"**.
+- Click **Install**.
 
----
+![Install Java Extension Pack](image_link_here)
 
-## Step 2: Set Up a Java Workspace
+### 4. Set Up Input and Output Files
+- Create two text files in your project directory:
+  - `input.txt` for test inputs.
+  - `output.txt` for storing program output.
 
-1. **Create a Folder:**
-   - Create a folder for your Java projects (e.g., `JavaProjects`).
+![Create Input and Output Files](image_link_here)
 
-2. **Open Folder in VS Code:**
-   - Click `File` > `Open Folder` > Select your folder.
+### 5. Configure tasks.json for Input/Output Redirection
+- Open the Command Palette (Ctrl+Shift+P) and select **"Tasks: Configure Task"**.
+- Add the following configuration in the `tasks.json` file:
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Java Program",
+      "type": "shell",
+      "command": "javac ${file} && java ${fileBasenameNoExtension} < input.txt > output.txt",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
+```
 
-3. **Create Files:**
-   - Inside the folder, create these files:
-     - `th.java` (Java program)
-     - `input.txt` (for input data)
-     - `output.txt` (for output data)
+![Configure tasks.json](image_link_here)
 
----
+### 6. Write Your Java Code
+- Open a new file and save it with a `.java` extension (e.g., `Main.java`).
+- Write your program using the `Scanner` class for input handling.
 
-## Step 3: Configure tasks.json
+Example Code:
+```java
+import java.util.*;
 
-1. **Open Tasks Configuration:**
-   - Press `Ctrl+Shift+P` > Search "Tasks: Configure Default Build Task".
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        System.out.println(a + b);
+    }
+}
+```
 
-2. **Add the Following Code:**
-   - In `.vscode/tasks.json`, add:
-     ```json
-     {
-         "version": "2.0.0",
-         "tasks": [
-             {
-                 "label": "Run Java with Input and Output Files",
-                 "type": "shell",
-                 "command": "cmd.exe",
-                 "args": ["/c", "javac th.java && java th < input.txt > output.txt"],
-                 "group": {
-                     "kind": "build",
-                     "isDefault": true
-                 },
-                 "presentation": {
-                     "reveal": "always",
-                     "panel": "dedicated"
-                 },
-                 "problemMatcher": []
-             }
-         ]
-     }
-     ```
+![Write Java Code](image_link_here)
 
----
+### 7. Run Your Program
+- Open the Terminal in VS Code.
+- Run the task using **Ctrl+Shift+B**.
+- Check the output in the `output.txt` file.
 
-## Step 4: Write and Test Your Code
+![Run Program](image_link_here)
 
-1. **Write Code:**
-   - Open `th.java` and write your Java program. For example:
-     ```java
-     import java.util.*;
+### 8. Debugging (Optional)
+- Use breakpoints and the debugging tool for step-by-step execution.
 
-     class th {
-         public static void main(String[] args) {
-             Scanner sc = new Scanner(System.in);
-             int a = sc.nextInt();
-             int b = sc.nextInt();
-             System.out.println("The sum is: " + (a + b));
-         }
-     }
-     ```
-
-2. **Prepare Input:**
-   - Add input to `input.txt`. For example:
-     ```
-     10
-     20
-     ```
-
-3. **Run the Task:**
-   - Press `Ctrl+Shift+P` > Search "Run Task" > Select "Run Java with Input and Output Files".
-
-4. **View Output:**
-   - Check `output.txt` for results. For example:
-     ```
-     The sum is: 30
-     ```
+![Debugging](image_link_here)
 
 ---
 
-## Step 5: Debugging (Optional)
-
-1. **Add Debug Configuration:**
-   - Go to `Run and Debug` (Ctrl+Shift+D) > Add Configuration > Select "Java".
-
-2. **Set Breakpoints:**
-   - Click on the line number to set breakpoints in your code.
-
-3. **Start Debugging:**
-   - Click the green play button or press `F5`.
-
----
-
-Congratulations! You are now set up to use Visual Studio Code for Java programming for Competitive Programming and DSA!
+This guide helps you streamline Java programming for Competitive Programming (CP) and Data Structures & Algorithms (DSA). Happy Coding!
